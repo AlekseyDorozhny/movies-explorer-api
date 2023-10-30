@@ -15,8 +15,9 @@ module.exports.deleteMovie = (req, res, next) => {
         throw new NotEnoughRightsError('Нельзя удалять фильм другого пользователя');
       }
     })
+    // eslint-disable-next-line arrow-body-style
     .then(() => {
-      Movie.findByIdAndRemove(req.params.movieId).orFail()
+      return Movie.findByIdAndRemove(req.params.movieId).orFail()
         .then(() => res.send({ message: 'Фильм успешно удален!' }));
     })
     .catch((err) => next(err));
