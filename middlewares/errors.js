@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
-  console.log(err);
+  // console.log(err);
   if (err.name === 'ValidationError' || err.name === 'CastError') {
     res.status(400).send({ message: 'Данные введены неправильно' });
     return;

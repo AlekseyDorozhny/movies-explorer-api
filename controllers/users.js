@@ -73,7 +73,13 @@ module.exports.updateProfile = (req, res, next) => {
       name: user.name,
       email: user.email,
     }))
-    .catch((err) => next(err));
+    .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictingRequestError('Данный Email уже зарегестрирован'));
+        return;
+      }
+      next(err);
+    });
 };
 
 module.exports.getCurrentUser = (req, res, next) => {

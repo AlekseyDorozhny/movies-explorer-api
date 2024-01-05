@@ -6,6 +6,6 @@
 
 ## Ссылки на проект
 
-IP 84.201.166.126
+IP 51.250.19.210
 
 Backend https://api.dorozha.movies.nomoredomainsrocks.ru
