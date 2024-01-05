@@ -8,18 +8,25 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const User = require('../models/user');
 
 module.exports.login = (req, res, next) => {
+  console.log('кто-то заходит');
+
   const { email, password } = req.body;
+  console.log('Параметры, которые пришли');
+  console.log(req.body);
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' },
+        { expiresIn: 36000 },
       );
       res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24,
+        httpOnly: false,
+        secure: false,
       });
+      console.log('отправляю токен');
+      console.log(token);
       res.send({ token });
     })
     .catch((err) => next(err));
@@ -76,6 +83,7 @@ module.exports.updateProfile = (req, res, next) => {
 };
 
 module.exports.getCurrentUser = (req, res, next) => {
+  console.log(req.user._id);
   User.findById(req.user._id).orFail()
     .then((user) => res.send({
       name: user.name,
