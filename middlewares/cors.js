@@ -3,6 +3,8 @@
 const allowedCors = [
   'http://localhost:3001',
   'http://localhost:3000',
+  'http://dorozha.movies.nomoredomainsrocks.ru',
+  'https://dorozha.movies.nomoredomainsrocks.ru',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
