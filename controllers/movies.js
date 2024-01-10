@@ -24,6 +24,7 @@ module.exports.deleteMovie = (req, res, next) => {
 };
 
 module.exports.createMovie = (req, res, next) => {
+  console.log(req.body);
   const {
     country, director, duration, year,
     description, image, trailerLink, thumbnail,
